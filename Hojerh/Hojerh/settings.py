@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'account',
-    'phonenumber_field'
+    'phonenumber_field',
+    'ToysApp'
 ]
 
 MIDDLEWARE = [

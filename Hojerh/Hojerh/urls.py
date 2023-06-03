@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include('core.url', namespace='core')),
     path("auth/", include('account.url')),
+    path("toys/", include('ToysApp.url', namespace="ToysApp"))
 ]

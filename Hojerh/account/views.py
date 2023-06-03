@@ -12,7 +12,6 @@ def register_user(request: HttpRequest):
 
         """ register user """
         form = RegisterForm(request.POST)
-        # form = UserCreationForm(request.POST)
         profile_form = RegisterProfileForm(request.POST, files=request.FILES)
 
         if form.is_valid() and profile_form.is_valid():
@@ -33,7 +32,6 @@ def register_user(request: HttpRequest):
 
     else:
         form = RegisterForm()
-        # form = UserCreationForm()
         profile_form = RegisterProfileForm()
 
     return render(request,
