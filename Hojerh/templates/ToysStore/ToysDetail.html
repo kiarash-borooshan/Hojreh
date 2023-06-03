@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="https://kit.fontawesome.com/9fea9eab69.js" crossorigin="anonymous"></script>
+    <title>Index</title>
+</head>
+
+<body>
+    <nav class="navbar is-light" role="navigation">
+        <div class="navbar-brand">
+            <p class="navbar-item title is-3"><span class="icon"><i class="fa-solid fa-hashtag"></i></span></p>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+
+                <a href="#" class="navbar-item p-2">Home</a>
+                <a href="#" class="navbar-item p-2">Categories</a>
+            </div>
+            <div class="navbar-end">
+
+                <a href="#" class="navbar-item">Log out</a>
+                <a href="#" class="navbar-item dashboard">
+                    Nima Parandavar
+                    <div>
+                        <img src="#" alt="#" class="avatar" />
+                    </div>
+                    <span class="icon"><i class="fa-solid fa-user"></i></span>
+                </a>
+                <span class="navbar-item has-text-muted">|</span>
+                <a href="#" class="navbar-item is-danger">
+                    <span>Write a new post</span>
+                </a>
+                <a href="#" class="navbar-item">Log in</a>
+                <a href="#" class="navbar-item">Sign up</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="column is-6 head">
+        <div class="image block"><img src="{% static 'img.jpg' %}" alt="#"></div>
+        <h1 class="title is-1 block">Title</h1>
+        <div class="block"><small>Category</small></div>
+        <p class="block">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, rem?</p>
+        <div class="block">Tags : <small>tags 1, tag 2, ...</small></div>
+        <hr>
+        <div>
+            <div class="block ah">
+                <div class="author">
+                    <img src="./static/img.jpg" class="author-img" alt="">
+                    <div style="font-size:35px; margin-right:30px"><span class="icon"><i
+                                class="fa-solid fa-user"></i></span> </div>
+                    <h4 class="title is-4"><a href="#">Nima Parandavar</a></h4>
+                </div>
+                <div class="block like">
+                    <form class="like-btn" method="post" data-url="url" id="likeForm">
+                        <input type="hidden" name="post_id" value="post_id" />
+                        <button type="submit" class="button"><span id="likeBtn" ><i class="fa-solid fa-heart"></i></span></button>
+                        <p id="likes">31</p>
+                    </form>
+                    <div>
+                        <button type="button" class="button"><span class="icon"><i class="fa-solid fa-share"></i></span></button>
+                    </div>
+                    <div>
+                        <button type="button" class="button"><span class="icon"><i class="fa-solid fa-copy"></i></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <h3 class="title is-3">Comments</h3>
+        <form class="field">
+            <div class="control block">
+                <input type="textarea" class="textarea is-small ta">
+            </div>
+            <div class="control block">
+                <input type="submit" class="button is-light" value="send">
+            </div>
+        </form>
+        <div class="comments">
+            <ul>
+                <li class="comment">
+                    <div class="author">
+                        <img src="./static/img.jpg" class="author-img" alt="">
+                        <h4 class="title is-4">Nima Parandavar</h4>
+                    </div>
+                    <hr>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, asperiores.</p>
+                </li>
+                <li class="comment">
+                    <div class="author">
+                        <img src="./static/img.jpg" class="author-img" alt="">
+                        <h4 class="title is-4">Nima Parandavar</h4>
+                    </div>
+                    <hr>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, asperiores.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>Nima Parandavar</strong></p>
+            <p><a href="https://www.instagram.com/nima.parandavar/" class="is-link"><span><i
+                            class="fa-brands fa-instagram"></i></span> nima.parandavar </a></p>
+            <p><a href="https://github.com/nima-parandavar" class="is-link"><span><i
+                            class="fa-brands fa-git-square"></i></span> nima-parandavar </a></p>
+            <p><a href="https://www.linkedin.com/in/nima-p-753b97138/" class="is-link"><span><i
+                            class="fa-brands fa-linkedin"></i></span> nima-p-753b97138</a></p>
+
+        </div>
+    </footer>
+</body>
+
+</html>
