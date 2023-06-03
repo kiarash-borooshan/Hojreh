@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
@@ -11,6 +12,7 @@ def register_user(request: HttpRequest):
 
         """ register user """
         form = RegisterForm(request.POST)
+        # form = UserCreationForm(request.POST)
         profile_form = RegisterProfileForm(request.POST, files=request.FILES)
 
         if form.is_valid() and profile_form.is_valid():
@@ -18,9 +20,9 @@ def register_user(request: HttpRequest):
             cd = form.cleaned_data
             pcd = profile_form.cleaned_data
 
-            user: User = form.save(commit=False)
-            user.set_password(cd['password'])
-            user.save()
+            user: User = form.save()
+            # user.set_password(cd['password'])
+            # user.save()
 
             profile = Profile.objects.get(user=user)
             profile.photo = pcd['photo']
@@ -31,6 +33,7 @@ def register_user(request: HttpRequest):
 
     else:
         form = RegisterForm()
+        # form = UserCreationForm()
         profile_form = RegisterProfileForm()
 
     return render(request,
