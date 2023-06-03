@@ -3,7 +3,7 @@
 {% block content %}
   <h1 class="display-1"> Register user </h1>
 
-  <form class="my-5" method="post">
+  <form class="my-5" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
     {{ profile_form }}
