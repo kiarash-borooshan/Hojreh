@@ -11,63 +11,29 @@
 {% block container %}
 
 <!-- container -->
-    <div class="container">
 
         <div class="columns">
+
             <div class="column is-8 is-light">
-                <div class="card card-display">
-                    <div class="card-image image imagesize">
-                        <img src="{% static 'img.jpg' %}" alt="Image" style="height: 16rem;">
-                        <!-- <img src="#" alt="Image" style="height: 16rem;">  -->
-                    </div>
-                    <div class="card-top">
-                        <div class="card-content">
-                            <h3 class="title is-3">Title</h3>
-                            <div class="subtitle is-6 is-light">
-                                <span class="icon"><i class="fa-solid fa-user"></i></span>
-                                <span>Nima Parandavar</span>
-                                <span> | </span>
-                                <span>21h ago</span>
-                            </div>
-                            <div class="text content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, id.</p>
-                            </div>
-                            <div>
-                                <a href="#" class="button is-light card-item see-more">see more</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                card -->
+                {% include 'partial/card.html' %}
 
                 <!-- pagination -->
-                <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
-                    <a class="pagination-previous" href="#">Previous</a>
-                    <a class="pagination-next" href="#" disabled>Next page</a>
-                    <ul class="pagination-list">
-                        <li>
-                            <a href="#" class="pagination-link <!--is-current -->" aria-label="Goto page 1">2</a>
-                        </li>
-                    </ul>
-                </nav>
+                {% include 'partial/pagination.html' %}
+
             </div>
+
             <div class="column">
-                <div class="panel is-light">
-                    <p class="panel-heading ">Categories</p>
-                    <a href="#" class="panel-block">
-                        <p>category name</p>
-                    </a>
-                </div>
-                <div class="panel is-light">
-                    <p class="panel-heading">
-                        Tags
-                    </p>
-                    <a href="#" class="button is-small is-rounded" style="margin:5px">
-                        <p>tag name</p>
-                    </a>
-                </div>
+<!--                categories panel -->
+                {% include 'partial/categories.html' %}
+
+<!--                tags-->
+                {% include 'partial/tags.html' %}
+
             </div>
         </div>
-    </div>
+
+
     <!-- footer -->
 
 </body>

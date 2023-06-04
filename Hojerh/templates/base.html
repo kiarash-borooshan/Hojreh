@@ -10,13 +10,17 @@
 <div class="content m-5">
     {% block content%}
     {% endblock %}
-
-</div><div class="container m-5">
-    {% block container%}
-    {% endblock %}
 </div>
 
+<div class="container m-5">
+    <div class="container">
+        {% block container%}
+        {% endblock %}
+    </div>
+</div>
 
 {% include 'partial/footer.html' %}
+
 </body>
+
 </html>
