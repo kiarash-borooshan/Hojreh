@@ -5,22 +5,28 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
+    objects = models.Manager()
+
     def __str__(self):
-        return f"category: {self.name}"
+        return self.name
 
 
 class GenderType(models.Model):
     name = models.CharField()
 
+    objects = models.Manager()
+
     def __str__(self):
-        return f" gender: {self.name}"
+        return self.name
 
 
 class Ages(models.Model):
     age = models.TextField()
 
+    objects = models.Manager()
+
     def __str__(self):
-        return f"age: {self.age}"
+        return self.age
 
 
 class Toys(models.Model):
@@ -30,6 +36,8 @@ class Toys(models.Model):
                              blank=True, null=True)
 
     name = models.CharField(max_length=255)
+    brand = models.CharField(max_length=255, 
+                             blank=True, null=True)
     code = models.TextField()
 
     # box_size = models.IntegerField(blank=True, null=True)
@@ -49,7 +57,7 @@ class Toys(models.Model):
                             related_name="age_toys",
                             blank=True, null=True)
 
-    banner = models.ImageField(null=True, blank=True)
+    banner = models.ImageField(upload_to='Toys/media', null=True, blank=True)
 
     body = models.TextField()
     
@@ -62,5 +70,7 @@ class Toys(models.Model):
 
     slug = models.SlugField()
 
+    objects = models.Manager()
+
     def __str__(self):
-        return f"toys: {self.name}"
+        return self.name

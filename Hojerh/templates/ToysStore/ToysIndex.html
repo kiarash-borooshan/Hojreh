@@ -16,7 +16,9 @@
 
             <div class="column is-8 is-light">
 <!--                card -->
-                {% include 'partial/card.html' %}
+                {% for toy in toys %}
+                    {% include 'partial/card.html' %}
+                {% endfor %}
 
                 <!-- pagination -->
                 {% include 'partial/pagination.html' %}
@@ -26,6 +28,12 @@
             <div class="column">
 <!--                categories panel -->
                 {% include 'partial/categories.html' %}
+
+<!--                gender type panel -->
+                {% include 'partial/gender_type.html' %}
+
+<!--                age panel -->
+                {% include 'partial/age.html' %}
 
 <!--                tags-->
                 {% include 'partial/tags.html' %}

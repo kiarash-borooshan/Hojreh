@@ -4,7 +4,7 @@ from .models import Toys, Ages, GenderType, Category
 
 @admin.register(Toys)
 class ToysDecor(admin.ModelAdmin):
-    list_display = ("user", "name", "category", "gender", "age", "available")
+    list_display = ("user", "name", "code", "category", "gender", "age", "available")
     prepopulated_fields = {
         'slug': ["name", "code"]
     }
