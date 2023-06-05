@@ -1,9 +1,27 @@
+
 <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
-    <a class="pagination-previous" href="#">Previous</a>
-    <a class="pagination-next" href="#" disabled>Next page</a>
+    {% if toys.has_previous %}
+        <a class="pagination-previous"
+           href="/toys/donyaye koodakan/?page={{ toys.previous_page_number }}">
+            صفحه قبلی</a>
+    {% endif %}
+
+    {% if toys.has_next %}
+        <a class="pagination-next"
+           href="/toys/donyaye koodakan/?page={{toys.next_page_number}}">
+            صفحه بعدی</a>
+    {% endif %}
+
+
     <ul class="pagination-list">
-        <li>
-            <a href="#" class="pagination-link <!--is-current -->" aria-label="Goto page 1">2</a>
-        </li>
+        {% for page in toys.paginator.page_range %}
+            <li>
+                <a href="/toys/donyaye koodakan/?page={{page}}"
+                   class="pagination-link
+                   {% if toys.number == page %}
+                    is-current {% endif %}"
+                   aria-label="Goto page 1">{{page}}</a>
+            </li>
+        {% endfor %}
     </ul>
 </nav>
