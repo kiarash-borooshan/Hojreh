@@ -2,6 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
+#  create manager
+class ToysManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(available=True)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -71,6 +77,8 @@ class Toys(models.Model):
     slug = models.SlugField()
 
     objects = models.Manager()
+
+    available_post = ToysManager()
 
     def __str__(self):
         return self.name

@@ -7,6 +7,7 @@ def index_toys(request):
 
     o_l = Toys.objects.all().order_by("-date")
     # o_l = Toys.objects.filter(available=True).order_by("-update")
+    # o_l = Toys.available_post.all()
 
     cat = Category.objects.all()
 
