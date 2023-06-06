@@ -33,7 +33,12 @@
                 <p id="likes">31</p>
             </form>
             <div>
-                <button type="button" class="button"><span class="icon"><i class="fa-solid fa-share"></i></span></button>
+                <a href="{% url 'ToysApp:toy_share_post' toy.category.name toy.slug %} "
+                        class="button">
+                    <span class="icon">
+                        <i class="fa-solid fa-share"></i>
+                    </span>
+                </a>
             </div>
             <div>
                 <button type="button" class="button"><span class="icon"><i class="fa-solid fa-copy"></i></span></button>

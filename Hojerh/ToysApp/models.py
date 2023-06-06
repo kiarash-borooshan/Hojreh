@@ -84,9 +84,9 @@ class Toys(models.Model):
 
     available_post = ToysManager()
 
-    # def get_absolute_url(self):
-    #     return reverse("ToysApp:toy_detail",
-    #                    args=[self.category.name, self.slug])
+    def get_absolute_url(self):
+        return reverse("ToysApp:toy_detail",
+                       args=[self.category.name, self.slug])
 
     def __str__(self):
         return self.name
