@@ -30,6 +30,7 @@
                 <p>{{ toy.video_link }} </p>
             </div>
             <div>
+<!--                {{ toy.get_absolute_url }}-->
                 <a href="{% url 'ToysApp:toy_detail' toy.category.name toy.slug %}"
                    class="button is-light card-item see-more">see more</a>
             </div>

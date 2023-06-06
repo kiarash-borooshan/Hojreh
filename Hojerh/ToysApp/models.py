@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 #  create manager
@@ -79,6 +80,10 @@ class Toys(models.Model):
     objects = models.Manager()
 
     available_post = ToysManager()
+
+    # def get_absolute_url(self):
+    #     return reverse("ToysApp:toy_detail",
+    #                    args=[self.category.name, self.slug])
 
     def __str__(self):
         return self.name
