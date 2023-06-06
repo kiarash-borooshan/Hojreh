@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Toys, Category, Ages, GenderType
 
 
@@ -37,10 +37,13 @@ def index_toys(request):
                   context)
 
 
-def detail_toys(request):
+def detail_toys(request, category, slug):
+    # toy = Toys.objects.get(category__name=category, slug=slug)
+    toy = get_object_or_404(Toys, category__name=category, slug=slug)
 
     return render(request,
-                  'ToysStore/ToysDetail.html')
+                  'ToysStore/ToysDetail.html',
+                  {"toy": toy})
 
 
 def categories_toys(request):

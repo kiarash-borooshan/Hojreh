@@ -7,16 +7,24 @@
 
 {% include 'partial/navBar.html' %}
 
+<!-- authentication-->
 <div class="content m-5">
     {% block content%}
     {% endblock %}
 </div>
 
+<!--Toys index-->
 <div class="container m-5">
     <div class="container">
         {% block container%}
         {% endblock %}
     </div>
+</div>
+
+<!--toys detail -->
+<div class="column is-6 head">
+    {% block detail %}
+    {% endblock %}
 </div>
 
 {% include 'partial/footer.html' %}
