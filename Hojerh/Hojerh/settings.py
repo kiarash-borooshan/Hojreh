@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'core',
     'account',
     'phonenumber_field',
-    'ToysApp'
+    'ToysApp',
+    "taggit",
 ]
 
 MIDDLEWARE = [

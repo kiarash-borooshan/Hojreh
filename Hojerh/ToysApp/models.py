@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+# from taggit.managers import TaggableManager
 from django.urls import reverse
 
 
@@ -69,6 +70,8 @@ class Toys(models.Model):
     body = models.TextField()
     
     video_link = models.TextField(null=True, blank=True)
+
+    # tags = TaggableManager()
 
     available = models.BooleanField()
 
