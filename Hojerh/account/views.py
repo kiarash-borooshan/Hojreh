@@ -10,13 +10,14 @@ def register_user(request: HttpRequest):
 
     if request.method == "POST":
 
+        # send data to server
         """ register user """
         form = RegisterForm(request.POST)
         profile_form = RegisterProfileForm(request.POST, files=request.FILES)
 
         if form.is_valid() and profile_form.is_valid():
 
-            cd = form.cleaned_data
+            # cd = form.cleaned_data
             pcd = profile_form.cleaned_data
 
             user: User = form.save()
