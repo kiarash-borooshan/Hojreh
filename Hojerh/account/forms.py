@@ -19,11 +19,22 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         widgets = {
-                    "username": forms.TextInput(attrs={'class': 'form-control mb-3'}),
-                    "email": forms.EmailInput(attrs={'class': 'form-control mb-3'}),
-                    "password1": forms.PasswordInput(attrs={'class': 'form-control mb-3'}),
-                    "password2": forms.PasswordInput(attrs={'class': 'form-control mb-6'}),
+                    "username": forms.TextInput(attrs={'class': 'input',
+                                                       "placeholder": "نام مغازه خود را وارد فرمایید"}),
+                    "email": forms.EmailInput(attrs={'class': 'input',
+                                                     "placeholder": "ایمیل خود را وارد فرمایید"}),
+                    "password1": forms.PasswordInput(attrs={'class': 'input',
+                                                            "placeholder": "پسورد"}),
+                    "password2": forms.PasswordInput(attrs={'class': 'input',
+                                                            "placeholder": "تکرار پسورد"}),
                 }
+
+        labels = {
+            "username": "نام مغازه",
+            "email": "ایمیل",
+            "password1": "رمز",
+            "password2": "تکرار رمز"
+        }
 
 
 class RegisterProfileForm(forms.ModelForm):
@@ -31,6 +42,13 @@ class RegisterProfileForm(forms.ModelForm):
         model = Profile
         exclude = ['user']
         widgets = {
-            'phone_number': forms.TextInput(attrs={'class': 'form-control mb-3'}),
-            'photo': forms.FileInput(attrs={'class': 'form-control mb-3'}),
+            'phone_number': forms.TextInput(attrs={'class': 'input',
+                                                   "placeholder": "شماره موبایل: به عنوان مثال ۰۹۳۳۴۲۲۷۶۷۹"}),
+            'photo': forms.FileInput(attrs={'class': 'input',
+                                            "placeholder": "تصویری از مغازه خود را بارگذاری کنید"}),
+
+        }
+
+        labels = {
+            "photo": "تصویری از مغازه خود بارگذاری فرمایید"
         }

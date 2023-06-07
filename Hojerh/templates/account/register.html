@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="display-1"> Register user </h1>
+  <h1 class="display-1"> Sign up </h1>
 
   <form class="my-5" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form}}
-    {{ profile_form }}
+
+    {% for field in form %}
+      <label for="{{field.id_for_label}}" class="label">{{field.label}}</label>
+      <div class="control">{{field}}</div>
+      <br>
+    {% endfor %}
+
+    {% for pform in profile_form %}
+      <label for="{{pform.id_for_label}}" class="label">{{pform.label}}</label>
+      <div class="control"> {{pform}}</div>
+      <br>
+    {% endfor %}
+
     <button type="submit" class="btn btn-success mt-4" > Join </button>
   </form>
 

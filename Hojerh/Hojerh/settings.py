@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'account',
-    'phonenumber_field',
+    "phonenumber_field",
+    "phonenumbers",
     'ToysApp',
     "taggit",
 ]
@@ -132,3 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 """ email config """
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST = 'localhost'
+
+
+""" PHONE number config """
+PHONENUMBER_DEFAULT_REGION = "IR"

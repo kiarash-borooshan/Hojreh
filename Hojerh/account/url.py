@@ -4,5 +4,5 @@ from django.urls import path
 # app_name = 'account'
 
 urlpatterns = [
-    path("register", views.register_user)
+    path("register", views.register_user, name="register")
 ]
