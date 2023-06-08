@@ -52,3 +52,14 @@ class RegisterProfileForm(forms.ModelForm):
         labels = {
             "photo": "تصویری از مغازه خود بارگذاری فرمایید"
         }
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            "class": "input"
+        })
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "input"})
+    )

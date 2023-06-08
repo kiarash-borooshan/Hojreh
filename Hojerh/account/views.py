@@ -1,8 +1,9 @@
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from .forms import RegisterForm, RegisterProfileForm
+from .forms import RegisterForm, RegisterProfileForm, LoginForm
 from .models import Profile
 
 
@@ -39,3 +40,32 @@ def register_user(request: HttpRequest):
                   'account/register.html',
                   {'form': form,
                    'profile_form': profile_form})
+
+
+def login_user(request:HttpRequest):
+    if request.method == "POST":
+        l_form = LoginForm(data=request.POST)
+
+        if l_form.is_valid():
+            cd = l_form.cleaned_data
+
+            email = cd["email"]
+            password = cd["password"]
+
+            try:
+                user: User = User.objects.get(email=email)
+
+                if user:
+                    if user.check_password(password):
+                        login(request, user)
+                        return HttpResponse("Dashboard")
+                    else:
+                        print("wrong password")
+            except user.DoesNotExist:
+                print("error")
+
+    else:
+        l_form = LoginForm()
+    return render(request,
+                  "account/login.html",
+                  {"form": l_form})
