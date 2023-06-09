@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.messages import add_message, SUCCESS, WARNING
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, RegisterProfileForm, LoginForm
@@ -30,7 +31,15 @@ def register_user(request: HttpRequest):
             profile.phone_number = pcd['phone_number']
             profile.save()
 
-            return HttpResponse("Created account")
+            """ message """
+            add_message(request, SUCCESS,
+                        "ثبت‌نام شما با موفقیت انجام شد، اکنون میتوانید به صفحه Log in بروید",
+                        "notification is-success",
+                        fail_silently=True)
+
+            return redirect("account:login")
+        # else:
+        #     return HttpResponse("ERROR")
 
     else:
         form = RegisterForm()
@@ -82,5 +91,9 @@ def login_user(request: HttpRequest):
 def logout_user(request):
 
     logout(request)
+
+    add_message(request, WARNING,
+                "شما از پنل کاربری خود خارج شدید",
+                "notification is-warning", True)
 
     return redirect("ToysApp:index")

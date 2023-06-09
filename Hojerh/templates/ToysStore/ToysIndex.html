@@ -15,6 +15,13 @@
         <div class="columns">
 
             <div class="column is-8 is-light">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="{{message.extra_tags}}"> {{message}}</div>
+                    {% endfor %}
+                {% endif %}
+
 <!--                card -->
                 {% for toy in toys %}
                     {% include 'partial/card.html' %}
