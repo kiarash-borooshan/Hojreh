@@ -1,8 +1,8 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import RegisterForm, RegisterProfileForm, LoginForm
 from .models import Profile
 
@@ -77,3 +77,10 @@ def login_user(request: HttpRequest):
     return render(request,
                   "account/login.html",
                   context)
+
+
+def logout_user(request):
+
+    logout(request)
+
+    return redirect("ToysApp:index")
