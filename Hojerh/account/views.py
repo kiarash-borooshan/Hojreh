@@ -42,7 +42,11 @@ def register_user(request: HttpRequest):
                    'profile_form': profile_form})
 
 
-def login_user(request:HttpRequest):
+def login_user(request: HttpRequest):
+
+    password_msg = None
+    user_msg = None
+
     if request.method == "POST":
         l_form = LoginForm(data=request.POST)
 
@@ -55,17 +59,21 @@ def login_user(request:HttpRequest):
             try:
                 user: User = User.objects.get(email=email)
 
-                if user:
-                    if user.check_password(password):
-                        login(request, user)
-                        return HttpResponse("Dashboard")
-                    else:
-                        print("wrong password")
-            except user.DoesNotExist:
-                print("error")
+                if user.check_password(password):
+                    login(request, user)
+                    return HttpResponse("Dashboard")
+                else:
+                    password_msg = "password is not match "
+            except User.DoesNotExist:
+                user_msg = "email is not valid"
 
     else:
         l_form = LoginForm()
+
+    context = {"form": l_form,
+               "password_msg": password_msg,
+               "user_msg": user_msg}
+
     return render(request,
                   "account/login.html",
-                  {"form": l_form})
+                  context)

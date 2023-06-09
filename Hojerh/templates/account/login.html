@@ -3,6 +3,16 @@
 
 {% block content %}
     <h1 class="display-1"> Log in </h1>
+    {% if password_msg %}
+        <div class="notification is-danger">
+            <p>{{password_msg}}</p>
+        </div>
+    {% endif %}
+    {% if user_msg %}
+        <div class="notification is-danger">
+            <p>{{user_msg}}</p>
+        </div>
+    {% endif %}
     <form class="my-5" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
