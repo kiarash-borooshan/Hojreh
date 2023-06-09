@@ -1,3 +1,4 @@
+{% load static %}
 
 <nav class="navbar is-light" role="navigation">
     <div class="navbar-brand">
@@ -14,10 +15,21 @@
             {% if request.user.is_authenticated %}
                 <a href="{% url 'account:logout' %}" class="navbar-item">Log out</a>
                 <a href="#" class="navbar-item dashboard">
-                    Nima Parandavar
-                    <div>
-                        <img src="#" alt="#" class="avatar" />
-                    </div>
+                    {{ request.user.first_name | capfirst }}
+                    {{ request.user.last_name | capfirst }}
+                    {{ request.user.username | capfirst }}
+                    {{ request.user.email | capfirst }}
+
+<!--                    doesn't show the pic ?-->
+                    {% if request.user.user__profile.photo %}
+                        <div>
+                            <img src="{{ request.user.user__profile.photo }}" alt="#" class="avatar" />
+                        </div>
+                    {% else %}
+                        <div>
+                            <img src="{% static 'no image.png' %}" alt="#" class="avatar" />
+                        </div>
+                    {% endif %}
                     <span class="icon"><i class="fa-solid fa-user"></i></span>
                 </a>
                 <span class="navbar-item has-text-muted">|</span>
