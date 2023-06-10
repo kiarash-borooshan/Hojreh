@@ -70,7 +70,12 @@ def login_user(request: HttpRequest):
 
                 if user.check_password(password):
                     login(request, user)
-                    return HttpResponse("Dashboard")
+
+                    add_message(request, SUCCESS,
+                                "شما به اکانت خود وارد شدید",
+                                "notification is-success",
+                                True)
+                    return redirect("account:dashboard")
                 else:
                     password_msg = "password is not match "
             except User.DoesNotExist:
@@ -97,3 +102,9 @@ def logout_user(request):
                 "notification is-warning", True)
 
     return redirect("ToysApp:index")
+
+
+def dashboard(request):
+
+    return render(request,
+                  'account/dashboard.html')
