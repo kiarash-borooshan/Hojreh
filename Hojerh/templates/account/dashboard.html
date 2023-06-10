@@ -18,6 +18,22 @@
         </div>
 
 <!--        -->
+        <div class="column">
+            <h2 class="title is-2">موجود در انبار</h2>
+            <div class="mypost">
+                {% for ap in av_post %}
+                    {% include 'partial/ds_card.html' %}
+                {% endfor %}
+            </div>
+            <br>
+
+            <h2 class="title is-2 ">اتمام موجود در انبار</h2>
+            <div class="mypost">
+                {% for ap in un_av_post %}
+                    {% include 'partial/ds_card.html' %}
+                {% endfor %}
+            </div>
+        </div>
 
     </div>
 

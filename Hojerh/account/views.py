@@ -1,3 +1,4 @@
+from ToysApp.models import Toys
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -105,8 +106,14 @@ def logout_user(request):
     return redirect("ToysApp:index")
 
 
-@login_required(login_url="account:login")
+@login_required()
 def dashboard(request):
+    available_post = Toys.available_post.filter()
+    # available_post = Toys.objects.all()
+    unavailable_post = Toys.unavailable_post.filter()
+    context = {"av_post": available_post,
+               "un_av_post": unavailable_post}
 
     return render(request,
-                  'account/dashboard.html')
+                  'account/dashboard.html',
+                  context)

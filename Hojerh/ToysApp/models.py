@@ -10,6 +10,11 @@ class ToysManager(models.Manager):
         return super().get_queryset().filter(available=True)
 
 
+class UnAvailablePostManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(available=False)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -83,6 +88,7 @@ class Toys(models.Model):
     objects = models.Manager()
 
     available_post = ToysManager()
+    unavailable_post = UnAvailablePostManager()
 
     def get_absolute_url(self):
         return reverse("ToysApp:toy_detail",

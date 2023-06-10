@@ -137,3 +137,6 @@ EMAIL_HOST = 'localhost'
 
 """ PHONE number config """
 PHONENUMBER_DEFAULT_REGION = "IR"
+
+# auth config
+LOGIN_URL = "account:login"
