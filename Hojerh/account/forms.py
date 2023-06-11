@@ -118,3 +118,12 @@ class PasswordEditForm(forms.Form):
         label="confirm password",
         widget=forms.PasswordInput(attrs={"class": "input"})
     )
+
+
+class DeleteForm(forms.Form):
+    password = forms.CharField(
+        label="confirm your password",
+        widget=forms.PasswordInput(attrs={"class": "input"}),
+        required=True,
+        help_text="your account need delete"
+    )

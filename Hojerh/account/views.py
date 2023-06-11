@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.messages import add_message, SUCCESS, WARNING
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RegisterProfileForm, LoginForm, ProfileEditForm, UserEditForm, PasswordEditForm
+from .forms import RegisterForm, RegisterProfileForm, LoginForm, \
+    ProfileEditForm, UserEditForm, PasswordEditForm, DeleteForm
 from .models import Profile
 
 
@@ -167,3 +168,25 @@ def edit_password(request):
     return render(request,
                   "account/change_password.html",
                   {"form": ps_form})
+
+
+@login_required()
+def delete_account(request):
+    if request.method == "POST":
+        form = DeleteForm(data=request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if request.user.check_password(password):
+                request.user.delete()
+                add_message(request, WARNING,
+                            "your account deleted",
+                            "notification is-danger", True)
+                return redirect("ToysApp:index")
+            else:
+                add_message(request, WARNING,
+                            "your password is wrong",
+                            "notification is-danger", True)
+    else:
+        form = DeleteForm()
+    return render(request, 'account/delete_account.html',
+                  {"form": form})

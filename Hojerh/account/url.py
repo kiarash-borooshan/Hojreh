@@ -10,4 +10,5 @@ urlpatterns = [
     path("dashboard", views.dashboard, name="dashboard"),
     path("dashboard/edit_info", views.edit_info, name="edit_info"),
     path("change_password", views.edit_password, name="change_password"),
+    path("delete_account", views.delete_account, name="delete_account"),
 ]
