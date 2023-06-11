@@ -91,3 +91,18 @@ class ProfileEditForm(forms.ModelForm):
         labels = {
             "photo": "تصویری از مغازه خود بارگذاری فرمایید"
         }
+
+
+class PasswordEditForm(forms.Form):
+    old_password = forms.CharField(
+        label="your old password",
+        widget=forms.PasswordInput(attrs={"class": "input"})
+    )
+    new_password = forms.CharField(
+        label="new password",
+        widget=forms.PasswordInput(attrs={"class": "input"})
+    )
+    new_password2 = forms.CharField(
+        label="confirm password",
+        widget=forms.PasswordInput(attrs={"class": "input"})
+    )

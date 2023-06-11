@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import add_message, SUCCESS, WARNING
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RegisterProfileForm, LoginForm, ProfileEditForm, UserEditForm
+from .forms import RegisterForm, RegisterProfileForm, LoginForm, ProfileEditForm, UserEditForm, PasswordEditForm
 from .models import Profile
 
 
@@ -146,3 +146,25 @@ def edit_info(request):
     return render(request,
                   "account/edit_info.html",
                   context)
+
+
+@login_required()
+def edit_password(request):
+    if request.method == "POST":
+        ps_form = PasswordEditForm(data=request.POST)
+        if ps_form.is_valid():
+            cd = ps_form.cleaned_data
+
+            if request.user.check_password(cd['old_password']):
+                if cd['new_password'] == cd["new_password2"]:
+                    request.user.set_password(cd["new_password"])
+                    request.user.save()
+                    add_message(request, SUCCESS,
+                                "your password has changed",
+                                "notification is-success", True)
+                    return redirect("account:dashboard")
+    else:
+        ps_form = PasswordEditForm()
+    return render(request,
+                  "account/change_password.html",
+                  {"form": ps_form})
