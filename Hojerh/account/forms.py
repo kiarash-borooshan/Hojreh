@@ -63,3 +63,31 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={"class": "input"})
     )
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+        widgets = {
+            "username": forms.TextInput(attrs={'class': 'input',
+                                               "placeholder": "نام مغازه خود را وارد فرمایید"}),
+            "email": forms.EmailInput(attrs={'class': 'input',
+                                             "placeholder": "ایمیل خود را وارد فرمایید"})
+        }
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']
+        widgets = {
+            'phone_number': forms.TextInput(attrs={'class': 'input',
+                                                   "placeholder": "شماره موبایل: به عنوان مثال ۰۹۳۳۴۲۲۷۶۷۹"}),
+
+
+        }
+
+        labels = {
+            "photo": "تصویری از مغازه خود بارگذاری فرمایید"
+        }

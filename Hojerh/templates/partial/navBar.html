@@ -21,9 +21,9 @@
                     {{ request.user.email | capfirst }}
 
 <!--                    doesn't show the pic ?-->
-                    {% if request.user.user__profile.photo %}
+                    {% if request.user.profile.photo %}
                         <div>
-                            <img src="{{ request.user.user__profile.photo }}" alt="#" class="avatar" />
+                            <img src="{{ request.user.profile.photo.url }}" alt="#" class="avatar" />
                         </div>
                     {% else %}
                         <div>

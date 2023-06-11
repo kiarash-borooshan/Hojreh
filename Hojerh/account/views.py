@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages import add_message, SUCCESS, WARNING
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RegisterProfileForm, LoginForm
+from .forms import RegisterForm, RegisterProfileForm, LoginForm, ProfileEditForm, UserEditForm
 from .models import Profile
 
 
@@ -116,4 +116,33 @@ def dashboard(request):
 
     return render(request,
                   'account/dashboard.html',
+                  context)
+
+
+@login_required()
+def edit_info(request):
+    if request.method == "POST":
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile,
+                                       data=request.POST,
+                                       files=request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            add_message(request,
+                        SUCCESS,
+                        "تغییرات با موفقیت انجام شد",
+                        "notification is-success", True)
+            return redirect("account:dashboard")
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+    context = {"form": user_form,
+               "profile_form": profile_form}
+    return render(request,
+                  "account/edit_info.html",
                   context)
