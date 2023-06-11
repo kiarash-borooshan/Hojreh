@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
 from .models import Profile
 
 
@@ -52,6 +54,16 @@ class RegisterProfileForm(forms.ModelForm):
         labels = {
             "photo": "تصویری از مغازه خود بارگذاری فرمایید"
         }
+
+    def clean_photo(self):
+        cd = self.cleaned_data
+        photo: InMemoryUploadedFile = cd['photo']
+        photo_name = photo.name
+        photo_format = photo_name.rsplit(".", 1)[-1]
+        extensions = ['jpeg', 'jpg', 'png']
+        if photo_format not in extensions:
+            raise forms.ValidationError("your photo format is not valid")
+        return cd["photo"]
 
 
 class LoginForm(forms.Form):

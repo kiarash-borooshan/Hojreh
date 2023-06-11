@@ -40,8 +40,7 @@ def register_user(request: HttpRequest):
                         fail_silently=True)
 
             return redirect("account:login")
-        # else:
-        #     return HttpResponse("ERROR")
+
 
     else:
         form = RegisterForm()
