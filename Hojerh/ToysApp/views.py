@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Toys, Category, Ages, GenderType
+from .forms import NewPostForm
 
 
 def index_toys(request):
@@ -76,3 +78,21 @@ def send_post(request, category, slug):
               message=caption + f"read this article at http://127.0.0.1:8000/{p.get_absolute_url()}")
 
     return redirect("ToysApp:index")
+
+
+@login_required
+def create_new_post(request):
+    if request.method == "POST":
+        form = NewPostForm(data=request.POST)
+        if form.is_valid():
+            post = form.save(comit=True, request=request)
+            post.save()
+
+            return redirect("ToysApp:index")
+
+    else:
+        form = NewPostForm()
+
+    return render(request,
+                  "ToysStore/create_new_post.html",
+                  {"form": form})

@@ -57,12 +57,18 @@ class RegisterProfileForm(forms.ModelForm):
 
     def clean_photo(self):
         cd = self.cleaned_data
-        photo: InMemoryUploadedFile = cd['photo']
-        photo_name = photo.name
-        photo_format = photo_name.rsplit(".", 1)[-1]
-        extensions = ['jpeg', 'jpg', 'png']
-        if photo_format not in extensions:
-            raise forms.ValidationError("your photo format is not valid")
+        try:
+            photo: InMemoryUploadedFile = cd['photo']
+            photo_name = photo.name
+            photo_format = photo_name.rsplit(".", 1)[-1]
+            extensions = ['jpeg', 'jpg', 'png']
+
+            if photo_format not in extensions:
+                raise forms.ValidationError("your photo format is not valid")
+
+        except (Exception, ):
+            pass
+
         return cd["photo"]
 
 
@@ -127,3 +133,5 @@ class DeleteForm(forms.Form):
         required=True,
         help_text="your account need delete"
     )
+
+
