@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="navbar is-light" role="navigation">
+<nav class="navbar {{request.user.profile.theme}}" role="navigation">
     <div class="navbar-brand">
         <p class="navbar-item title is-3"><span class="icon"><i class="fa-solid fa-hashtag"></i></span></p>
     </div>
