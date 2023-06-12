@@ -29,7 +29,6 @@ def index_toys(request):
     except PageNotAnInteger:
         toy = paginator.page(1)
 
-
     context = {"toys": toy,
                "cats": cat,
                "gender_types": gender_type,
