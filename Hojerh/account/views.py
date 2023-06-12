@@ -7,7 +7,8 @@ from django.contrib.messages import add_message, SUCCESS, WARNING
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, RegisterProfileForm, LoginForm, \
-    ProfileEditForm, UserEditForm, PasswordEditForm, DeleteForm
+    ProfileEditForm, UserEditForm, PasswordEditForm, DeleteForm, \
+    ThemeForm
 from .models import Profile
 
 
@@ -111,8 +112,18 @@ def dashboard(request):
     available_post = Toys.available_post.filter()
     # available_post = Toys.objects.all()
     unavailable_post = Toys.unavailable_post.filter()
+    if request.method == "POST":
+        theme_form = ThemeForm(instance=request.user.profile, data=request.POST)
+        if theme_form.is_valid():
+            theme_form.save(commit=True)
+            return redirect("account:dashboard")
+    else:
+        theme_form = ThemeForm(instance=request.user.profile, data=request.POST)
+
     context = {"av_post": available_post,
-               "un_av_post": unavailable_post}
+               "un_av_post": unavailable_post,
+               "form": theme_form
+               }
 
     return render(request,
                   'account/dashboard.html',

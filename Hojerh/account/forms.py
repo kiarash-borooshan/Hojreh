@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
-
 from .models import Profile
 
 
@@ -135,3 +134,10 @@ class DeleteForm(forms.Form):
     )
 
 
+class ThemeForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("theme", )
+        widgets = {
+            "theme": forms.RadioSelect()
+        }
