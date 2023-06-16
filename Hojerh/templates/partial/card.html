@@ -13,7 +13,7 @@
     <div class="card-top">
         <div class="card-content">
             <h3 class="title is-3"> {{ toy.name | title }}</h3>
-            <div class="subtitle is-6 is-light">
+            <div class="subtitle is-6 {{request.user.profile.theme}}">
                 <span class="icon"><i class="fa-solid fa-user"></i></span>
                 <span>
                     {{ toy.user.first_name | capfirst }}
@@ -32,7 +32,7 @@
             <div>
 <!--                {{ toy.get_absolute_url }}-->
                 <a href="{% url 'ToysApp:toy_detail' toy.category.name toy.slug %}"
-                   class="button is-light card-item see-more">see more</a>
+                   class="button {{request.user.profile.theme}} card-item see-more">see more</a>
             </div>
         </div>
     </div>

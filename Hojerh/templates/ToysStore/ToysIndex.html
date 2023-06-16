@@ -14,7 +14,7 @@
 
         <div class="columns">
 
-            <div class="column is-8 is-light">
+            <div class="column is-8 {{request.user.profile.theme}}">
 
                 {% if messages %}
                     {% for message in messages %}
