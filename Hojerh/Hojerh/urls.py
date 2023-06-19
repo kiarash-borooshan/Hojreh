@@ -8,7 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include('core.url', namespace='core')),
     path("account/", include('account.url')),
-    path("toys/", include('ToysApp.url', namespace="ToysApp"))
+    path("toys/", include('ToysApp.url', namespace="ToysApp")),
+    path("spatial/", include("rporterGeoSpatial.url", namespace="reporterGeoSpatial"))
 ]
 
 

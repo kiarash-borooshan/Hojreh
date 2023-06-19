@@ -36,3 +36,4 @@ def create_profile(sender, **kwargs):
     if created:
         profile = Profile(user=user)
         profile.save()
+

@@ -25,7 +25,7 @@ class Category(models.Model):
 
 
 class GenderType(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=255)
 
     objects = models.Manager()
 

@@ -26,12 +26,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'core',
     'account',
     "phonenumber_field",
     "phonenumbers",
     'ToysApp',
     "taggit",
+    "leaflet",
+    "rporterGeoSpatial",
 ]
 
 MIDDLEWARE = [
@@ -104,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -115,12 +118,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATICFILES_DIRS = [BASE_DIR, "static"]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [BASE_DIR, "static"]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 """ media config """
 # Base url to serve media files
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -140,3 +143,14 @@ PHONENUMBER_DEFAULT_REGION = "IR"
 
 # auth config
 LOGIN_URL = "account:login"
+
+# "DEFAULT_CENTER": (.23, 36),
+""" leaflet config """
+LEAFLET_CONFIG = {
+    "DEFAULT_CENTER": (32, 53),
+    "DEFAULT_ZOOM": 5,
+    "MAX_ZOOM": 30,
+    "min_zoom": 3,
+    "SCALE": 'both',
+    "ATTRIBUTION_PREFIX": 'inspired by life in GIS'
+}

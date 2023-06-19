@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load leaflet_tags %}
+
+<head>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <meta charset="UTF-8">
+    <title>our home</title>
+<!--    <style type="text/css">-->
+<!--        #gis {width: 80%; height:70% }-->
+<!--    </style>-->
+    <script type="text/javascript"
+            src="{% static 'GeoSpatial/dist/leaflet.ajax.js' %}">
+
+    </script>
+</head>
+
+<body>
+
+<h1> success </h1>
+
+<hr>
+<script type="text/javascript">
+    function our_layer(map, option){
+        var dataset = new L.GeoJSON.AJAX("{% url 'rporterGeoSpatial:country'%}",{
+            onEachFeature: function(feature, layer){
+                layer.bindPopup(feature.properties.name_1.toString());
+            }
+        });
+
+        var point = new L.GeoJSON.AJAX("{% url 'rporterGeoSpatial:incident'%}",{
+            onEachFeature: function(feature, layer){
+                layer.bindPopup(feature.properties.name.toString());
+            }
+        });
+
+        dataset.addTo(map);
+        point.addTo(map);
+    }
+</script>
+{% leaflet_map "gis" callback="window.our_layer" %}
+
+</body>
+
+</html>
