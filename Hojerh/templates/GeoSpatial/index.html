@@ -25,6 +25,23 @@
 <script type="text/javascript">
     function our_layer(map, option){
         var dataset = new L.GeoJSON.AJAX("{% url 'rporterGeoSpatial:country'%}",{
+
+            style: function colors(feature){
+                switch(feature.properties.name_1){
+                    case "Semnan":
+                        return{
+                            color: "orange",
+                            fillOpacity:0.2
+                        };
+                    break;
+                    case "Kordestan":
+                        return{
+                            color: "purple"
+                        };
+                    break;
+                }
+            },
+
             onEachFeature: function(feature, layer){
                 layer.bindPopup(feature.properties.name_1.toString());
             }
