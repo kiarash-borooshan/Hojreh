@@ -13,14 +13,14 @@
 <!--    </style>-->
 
     <link rel="stylesheet" type="text/css"
-          href="{% static 'GeoSpatial/leafletGrpLyrCntrl/leaflet.groupedlayercontrol.min.css' %}">
+          href="{% static 'GeoSpatial/leafletGrpLyrCntrl/leaflet.groupedlayercontrol.css' %}">
 
     <script type="text/javascript"
             src="{% static 'GeoSpatial/dist/leaflet.ajax.js' %}">
     </script>
 
     <script type="text/javascript"
-            src="{% static 'GeoSpatial/leafletGrpLyrCntrl/leaflet.groupedlayercontrol.min.js' %}">
+            src="{% static 'GeoSpatial/leafletGrpLyrCntrl/leaflet.groupedlayercontrol.js' %}">
     </script>
 
 </head>
@@ -33,7 +33,7 @@
 <script type="text/javascript">
     function our_layer(map, option){
 
-        var osm = 'http://{s}.tile.openstreetmap.org/{z}/{y}/{x}.png';
+<!--        var osm = 'http://{s}.tile.openstreetmap.org/{z}/{y}/{x}.png';-->
 
         var dataset = new L.GeoJSON.AJAX("{% url 'rporterGeoSpatial:country'%}",{
 
