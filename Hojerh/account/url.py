@@ -1,10 +1,13 @@
 from . import views
 from django.urls import path
 
+""" em = Earth Monitor """
+
 app_name = 'account'
 
 urlpatterns = [
     path("register", views.register_user, name="register"),
+    path("register_em", views.register_user_em, name="register_em"),
     path("login", views.login_user, name="login"),
     path("logout", views.logout_user, name="logout"),
     path("dashboard", views.dashboard, name="dashboard"),
