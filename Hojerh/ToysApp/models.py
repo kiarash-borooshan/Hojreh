@@ -23,6 +23,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Categorie'
+
 
 class GenderType(models.Model):
     name = models.CharField(max_length=255)
@@ -40,6 +43,9 @@ class Ages(models.Model):
 
     def __str__(self):
         return self.age
+
+    class Meta:
+        verbose_name = "Age"
 
 
 class Toys(models.Model):
@@ -96,3 +102,6 @@ class Toys(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "Toy"

@@ -1,4 +1,5 @@
 # from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 
 
@@ -11,6 +12,9 @@ class HealthStatus(models.Model):
 
 
 class Incidences(models.Model):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name="em_user")
     location = models.PointField(srid=4326)
     geo_tag_photo = models.ImageField(upload_to="geoTag_Image",
                                       blank=True, null=True)
