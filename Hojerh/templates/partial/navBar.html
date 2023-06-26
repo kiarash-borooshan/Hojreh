@@ -39,7 +39,7 @@
                 </a>
             {% else %}
                 <a href="{% url 'account:login' %}" class="navbar-item">Log in to Retail warehousing </a>
-                <a href="#" class="navbar-item">Log in to AiEarthMonitor </a>
+                <a href="{% url 'account:login_em' %}" class="navbar-item">Log in to AiEarthMonitor </a>
                 <a href="{% url 'account:register' %}" class="navbar-item">Sign up to Retail warehousing</a>
                 <a href="{% url 'account:register_em' %}" class="navbar-item">Sign up to AiEarthMonitor</a>
             {% endif %}

@@ -137,6 +137,48 @@ def login_user(request: HttpRequest):
                   context)
 
 
+def login_em_user(request: HttpRequest):
+
+    password_msg = None
+    user_msg = None
+
+    if request.method == "POST":
+        l_form = LoginForm(data=request.POST)
+
+        if l_form.is_valid():
+            cd = l_form.cleaned_data
+
+            email = cd["email"]
+            password = cd["password"]
+
+            try:
+                user: User = User.objects.get(email=email)
+
+                if user.check_password(password):
+                    login(request, user)
+
+                    add_message(request, SUCCESS,
+                                "شما به اکانت خود وارد شدید",
+                                "notification is-success",
+                                True)
+                    return redirect("rporterGeoSpatial:home")
+                else:
+                    password_msg = "password is not match "
+            except User.DoesNotExist:
+                user_msg = "email is not valid"
+
+    else:
+        l_form = LoginForm()
+
+    context = {"form": l_form,
+               "password_msg": password_msg,
+               "user_msg": user_msg}
+
+    return render(request,
+                  "account/login_em.html",
+                  context)
+
+
 def logout_user(request):
 
     logout(request)

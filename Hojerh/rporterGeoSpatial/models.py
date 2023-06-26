@@ -2,9 +2,32 @@
 from django.contrib.gis.db import models
 
 
+class HealthStatus(models.Model):
+    name = models.CharField(max_length=255)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.name
+
+
 class Incidences(models.Model):
-    name = models.CharField(max_length=20)
     location = models.PointField(srid=4326)
+    geo_tag_photo = models.ImageField(upload_to="geoTag_Image",
+                                      blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=20)
+    variety = models.CharField(max_length=255,
+                               blank=True, null=True)
+    health_status = models.ForeignKey(HealthStatus,
+                                      on_delete=models.CASCADE,
+                                      related_name="health_status",
+                                      blank=True, null=True)
+
+    disease_name = models.CharField(max_length=255,
+                                    blank=True, null=True)
+
+    solution = models.TextField(blank=True, null=True)
+
     objects = models.Manager()
 
     def __str__(self):
