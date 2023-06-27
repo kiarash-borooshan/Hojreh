@@ -14,7 +14,8 @@ class HealthStatus(models.Model):
 class Incidences(models.Model):
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
-                             related_name="em_user")
+                             related_name="em_user",
+                             blank=True, null=True)
     location = models.PointField(srid=4326)
     geo_tag_photo = models.ImageField(upload_to="geoTag_Image",
                                       blank=True, null=True)
@@ -29,6 +30,7 @@ class Incidences(models.Model):
 
     disease_name = models.CharField(max_length=255,
                                     blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True)
 
     solution = models.TextField(blank=True, null=True)
 
@@ -38,7 +40,7 @@ class Incidences(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Incidences'
+        verbose_name = 'Incidence'
 
 
 class IRN_adm1(models.Model):
@@ -59,4 +61,4 @@ class IRN_adm1(models.Model):
         return self.name_1
 
     class Meta:
-        verbose_name = 'counties'
+        verbose_name = 'countie'

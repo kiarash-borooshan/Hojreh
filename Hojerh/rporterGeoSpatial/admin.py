@@ -1,12 +1,20 @@
 from django.contrib import admin
 from leaflet.admin import LeafletGeoAdmin
-from .models import Incidences, IRN_adm1
+from .models import Incidences, IRN_adm1, HealthStatus
 # Register your models here.
 
 
 @admin.register(Incidences)
 class IncidenceDecor(LeafletGeoAdmin):
     list_display = ("name", "location")
+    prepopulated_fields = {
+        "slug": ["name", "variety", "disease_name"]
+    }
+
+
+@admin.register(HealthStatus)
+class HealthStatusDecore(LeafletGeoAdmin):
+    list_display = ("name", )
 
 
 @admin.register(IRN_adm1)

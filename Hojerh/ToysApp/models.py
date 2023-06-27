@@ -37,7 +37,7 @@ class GenderType(models.Model):
 
 
 class Ages(models.Model):
-    age = models.TextField()
+    age = models.CharField(max_length=30)
 
     objects = models.Manager()
 
