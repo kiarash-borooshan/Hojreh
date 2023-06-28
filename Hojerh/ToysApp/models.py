@@ -80,7 +80,7 @@ class Toys(models.Model):
 
     body = models.TextField()
     
-    video_link = models.TextField(null=True, blank=True)
+    video_link = models.URLField(null=True, blank=True)
 
     tags = TaggableManager()
 

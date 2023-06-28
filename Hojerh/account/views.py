@@ -58,8 +58,6 @@ def register_user_em(request: HttpRequest):
     """ register ErthMntr user"""
     if request.method == "POST":
 
-        # send data to server
-        """ register user """
         form = RegisterEmForm(request.POST)
         profile_form = RegisterEmProfileForm(request.POST, files=request.FILES)
 
