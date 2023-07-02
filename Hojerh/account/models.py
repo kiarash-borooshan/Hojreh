@@ -25,6 +25,8 @@ class Profile(models.Model):
     theme = models.CharField(max_length=50,
                              choices=Theme_CHOICES, default="is-success")
 
+    objects = models.Manager()
+
     def __str__(self):
         return f"self.user"
 
@@ -44,6 +46,8 @@ class EmProfile(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name="Em_profile")
     phone_number = PhoneNumberField(blank=True, null=True)
+
+    objects = models.Manager()
 
     def __str__(self):
         return f"self.user"

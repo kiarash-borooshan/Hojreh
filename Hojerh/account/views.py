@@ -10,7 +10,7 @@ from .forms import RegisterForm, RegisterEmForm, RegisterProfileForm, RegisterEm
     LoginForm, \
     ProfileEditForm, UserEditForm, PasswordEditForm, \
     DeleteForm, ThemeForm
-from .models import Profile
+from .models import Profile, EmProfile
 
 
 def register_user(request: HttpRequest):
@@ -70,7 +70,7 @@ def register_user_em(request: HttpRequest):
             # user.set_password(cd['password'])
             # user.save()
 
-            profile = Profile.objects.get(user=user)
+            profile = EmProfile.objects.get(user=user)
             # profile.photo = pcd['photo']
             profile.phone_number = pcd['phone_number']
             profile.save()
@@ -81,7 +81,7 @@ def register_user_em(request: HttpRequest):
                         "notification is-success",
                         fail_silently=True)
 
-            return redirect("account:login")
+            return redirect("account:login_em")
 
     else:
         form = RegisterEmForm()
@@ -159,7 +159,7 @@ def login_em_user(request: HttpRequest):
                                 "شما به اکانت خود وارد شدید",
                                 "notification is-success",
                                 True)
-                    return redirect("rporterGeoSpatial:home")
+                    return redirect("rporterGeoSpatial:em_dashboard")
                 else:
                     password_msg = "password is not match "
             except User.DoesNotExist:
@@ -185,6 +185,7 @@ def logout_user(request):
                 "شما از پنل کاربری خود خارج شدید",
                 "notification is-warning", True)
 
+    # return redirect("core:index")
     return redirect("ToysApp:index")
 
 

@@ -27,9 +27,28 @@
 
 <body>
 
-<h1> success </h1>
+<!-- message -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="{{message.extra_tags}}"> {{message}}</div>
+    {% endfor %}
+{% endif %}
+
+<!-- dashboard -->
+<h1 class="title is-1">Ai Earth Monitor Dashboard</h1>
+
+<div class="columns">
+<!--        -->
+    <div class="column is-4">
+        {% include 'partial/dashboard_setting.html' %}
+        {% include 'partial/theme_box.html' %}
+    </div>
+
+</div>
 
 <hr>
+
+<!-- map -->
 <script type="text/javascript">
     function our_layer(map, option){
 

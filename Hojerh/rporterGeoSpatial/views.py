@@ -7,10 +7,10 @@ from django.shortcuts import render
 # Create your views here.
 
 
-def home_page_view(TemplateView):
+def home_page_view_dashboard(TemplateView):
     template_name = "index.html"
     return render(TemplateView,
-                  "GeoSpatial/index.html")
+                  "GeoSpatial/em_dashboard.html")
 
 
 def county_datasets(request):
