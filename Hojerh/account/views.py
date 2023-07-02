@@ -189,7 +189,7 @@ def logout_user(request):
     return redirect("ToysApp:index")
 
 
-@login_required()
+@login_required(login_url="account:login")
 def dashboard(request):
     available_post = Toys.available_post.filter()
     # available_post = Toys.objects.all()
@@ -212,7 +212,7 @@ def dashboard(request):
                   context)
 
 
-@login_required()
+@login_required(login_url="account:login")
 def edit_info(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user,
@@ -241,7 +241,36 @@ def edit_info(request):
                   context)
 
 
-@login_required()
+@login_required(login_url="account:login_em")
+def edit_em_info(request):
+    if request.method == "POST":
+        user_form = UserEditForm(instance=request.user,
+                                 data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile,
+                                       data=request.POST,
+                                       files=request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            add_message(request,
+                        SUCCESS,
+                        "تغییرات با موفقیت انجام شد",
+                        "notification is-success", True)
+            return redirect("account:dashboard")
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+    context = {"form": user_form,
+               "profile_form": profile_form}
+    return render(request,
+                  "account/edit_info.html",
+                  context)
+
+
+@login_required(login_url="account:login")
 def edit_password(request):
     if request.method == "POST":
         ps_form = PasswordEditForm(data=request.POST)
@@ -263,8 +292,52 @@ def edit_password(request):
                   {"form": ps_form})
 
 
-@login_required()
+@login_required(login_url="account:login_em")
+def edit_em_password(request):
+    if request.method == "POST":
+        ps_form = PasswordEditForm(data=request.POST)
+        if ps_form.is_valid():
+            cd = ps_form.cleaned_data
+
+            if request.user.check_password(cd['old_password']):
+                if cd['new_password'] == cd["new_password2"]:
+                    request.user.set_password(cd["new_password"])
+                    request.user.save()
+                    add_message(request, SUCCESS,
+                                "your password has changed",
+                                "notification is-success", True)
+                    return redirect("account:dashboard")
+    else:
+        ps_form = PasswordEditForm()
+    return render(request,
+                  "account/change_password.html",
+                  {"form": ps_form})
+
+
+@login_required(login_url="account:login")
 def delete_account(request):
+    if request.method == "POST":
+        form = DeleteForm(data=request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            if request.user.check_password(password):
+                request.user.delete()
+                add_message(request, WARNING,
+                            "your account deleted",
+                            "notification is-danger", True)
+                return redirect("ToysApp:index")
+            else:
+                add_message(request, WARNING,
+                            "your password is wrong",
+                            "notification is-danger", True)
+    else:
+        form = DeleteForm()
+    return render(request, 'account/delete_account.html',
+                  {"form": form})
+
+
+@login_required(login_url="account:login_em")
+def delete_em_account(request):
     if request.method == "POST":
         form = DeleteForm(data=request.POST)
         if form.is_valid():

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from .models import IRN_adm1, Incidences
@@ -7,6 +8,7 @@ from django.shortcuts import render
 # Create your views here.
 
 
+@login_required(login_url="account:login_em")
 def home_page_view_dashboard(TemplateView):
     template_name = "index.html"
     return render(TemplateView,

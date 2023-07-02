@@ -142,7 +142,7 @@ EMAIL_HOST = 'localhost'
 PHONENUMBER_DEFAULT_REGION = "IR"
 
 # auth config
-LOGIN_URL = "account:login"
+# LOGIN_URL = "account:login"
 
 # "DEFAULT_CENTER": (.23, 36),
 """ leaflet config """
