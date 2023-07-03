@@ -6,9 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.messages import add_message, SUCCESS, WARNING
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, RegisterEmForm, RegisterProfileForm, RegisterEmProfileForm, \
-    LoginForm, \
-    ProfileEditForm, UserEditForm, PasswordEditForm, \
+from .forms import RegisterForm, RegisterEmForm, \
+    RegisterProfileForm, RegisterEmProfileForm, \
+    LoginForm, UserEditForm, \
+    ProfileEditForm, ProfileEmEditForm, \
+    PasswordEditForm, \
     DeleteForm, ThemeForm
 from .models import Profile, EmProfile
 
@@ -212,6 +214,29 @@ def dashboard(request):
                   context)
 
 
+@login_required(login_url="account:login_em")
+def dashboard_em(request):
+    available_post = Toys.available_post.filter()
+    # available_post = Toys.objects.all()
+    unavailable_post = Toys.unavailable_post.filter()
+    if request.method == "POST":
+        theme_form = ThemeForm(instance=request.user.profile, data=request.POST)
+        if theme_form.is_valid():
+            theme_form.save(commit=True)
+            return redirect("account:dashboard_em")
+    else:
+        theme_form = ThemeForm(instance=request.user.profile, data=request.POST)
+
+    context = {"av_post": available_post,
+               "un_av_post": unavailable_post,
+               "form": theme_form
+               }
+
+    return render(request,
+                  'account/dashboard_em.html',
+                  context)
+
+
 @login_required(login_url="account:login")
 def edit_info(request):
     if request.method == "POST":
@@ -246,9 +271,9 @@ def edit_em_info(request):
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)
-        profile_form = ProfileEditForm(instance=request.user.profile,
-                                       data=request.POST,
-                                       files=request.FILES)
+        profile_form = ProfileEmEditForm(instance=request.user.profile,
+                                         data=request.POST,
+                                         files=request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -258,10 +283,10 @@ def edit_em_info(request):
                         SUCCESS,
                         "تغییرات با موفقیت انجام شد",
                         "notification is-success", True)
-            return redirect("account:dashboard")
+            return redirect("rporterGeoSpatial:em_dashboard")
     else:
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+        profile_form = ProfileEmEditForm(instance=request.user.profile)
 
     context = {"form": user_form,
                "profile_form": profile_form}
@@ -285,6 +310,28 @@ def edit_password(request):
                                 "your password has changed",
                                 "notification is-success", True)
                     return redirect("account:dashboard")
+    else:
+        ps_form = PasswordEditForm()
+    return render(request,
+                  "account/change_password.html",
+                  {"form": ps_form})
+
+
+@login_required(login_url="account:login_em")
+def edit_em_password(request):
+    if request.method == "POST":
+        ps_form = PasswordEditForm(data=request.POST)
+        if ps_form.is_valid():
+            cd = ps_form.cleaned_data
+
+            if request.user.check_password(cd['old_password']):
+                if cd['new_password'] == cd["new_password2"]:
+                    request.user.set_password(cd["new_password"])
+                    request.user.save()
+                    add_message(request, SUCCESS,
+                                "your password has changed",
+                                "notification is-success", True)
+                    return redirect("rporterGeoSpatial:em_dashboard")
     else:
         ps_form = PasswordEditForm()
     return render(request,

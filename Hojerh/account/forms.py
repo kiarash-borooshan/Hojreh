@@ -163,12 +163,20 @@ class ProfileEditForm(forms.ModelForm):
         widgets = {
             'phone_number': forms.TextInput(attrs={'class': 'input',
                                                    "placeholder": "شماره موبایل: به عنوان مثال ۰۹۳۳۴۲۲۷۶۷۹"}),
-
-
         }
 
         labels = {
             "photo": "تصویری از مغازه خود بارگذاری فرمایید"
+        }
+
+
+class ProfileEmEditForm(forms.ModelForm):
+    class Meta:
+        model = EmProfile
+        exclude = ['user']
+        widgets = {
+            'phone_number': forms.TextInput(attrs={'class': 'input',
+                                                   "placeholder": "شماره موبایل: به عنوان مثال ۰۹۳۳۴۲۲۷۶۷۹"})
         }
 
 

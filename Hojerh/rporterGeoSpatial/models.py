@@ -19,7 +19,7 @@ class Incidences(models.Model):
     location = models.PointField(srid=4326)
     geo_tag_photo = models.ImageField(upload_to="geoTag_Image",
                                       blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    Date = models.DateField(blank=True, null=True)
     name = models.CharField(max_length=20)
     variety = models.CharField(max_length=255,
                                blank=True, null=True)

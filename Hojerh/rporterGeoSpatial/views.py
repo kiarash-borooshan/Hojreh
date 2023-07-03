@@ -3,7 +3,8 @@ from django.core.serializers import serialize
 from django.http import HttpResponse
 from .models import IRN_adm1, Incidences
 from django.views.generic import TemplateView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import NewEmPostForm
 
 # Create your views here.
 
@@ -23,3 +24,17 @@ def county_datasets(request):
 def point_dataset(request):
     points = serialize("geojson", Incidences.objects.all())
     return HttpResponse(points, content_type="json")
+
+
+@login_required(login_url="account:login_em")
+def create_new_em_post(request):
+    if request.method == "POST":
+        em_form = NewEmPostForm(data=request.POST)
+        if em_form.is_valid():
+            em_form.save(comit=True, request=request)
+            return redirect("rporterGeoSpatial:em_dashboard")
+    else:
+        em_form = NewEmPostForm()
+    return render(request,
+                  "GeoSpatial/create_new_em_post.html",
+                  {"form": em_form})

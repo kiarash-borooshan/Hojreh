@@ -82,7 +82,7 @@ class Toys(models.Model):
     
     video_link = models.URLField(null=True, blank=True)
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     available = models.BooleanField()
 

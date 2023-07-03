@@ -79,7 +79,7 @@ def send_post(request, category, slug):
     return redirect("ToysApp:index")
 
 
-@login_required
+@login_required(login_url="account:login")
 def create_new_post(request):
     if request.method == "POST":
         form = NewPostForm(data=request.POST)
